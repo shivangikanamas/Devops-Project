@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b1020">
+    <title>Devops Project | Program Output</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #0b1020;
+        color: #e5e7eb;
+      }
+
+      body {
+        box-sizing: border-box;
+        display: grid;
+        min-height: 100vh;
+        margin: 0;
+        padding: 24px;
+        place-items: center;
+      }
+
+      main {
+        width: min(100%, 640px);
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: clamp(1.75rem, 5vw, 2.5rem);
+      }
+
+      p {
+        margin: 0 0 24px;
+        color: #aab4c8;
+        line-height: 1.6;
+      }
+
+      .terminal {
+        overflow: hidden;
+        border: 1px solid #29334b;
+        border-radius: 12px;
+        background: #101827;
+        box-shadow: 0 24px 64px #0005;
+      }
+
+      .titlebar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 18px;
+        border-bottom: 1px solid #29334b;
+        color: #aab4c8;
+        font-size: 0.85rem;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #f87171;
+      }
+
+      .dot:nth-child(2) {
+        background: #fbbf24;
+      }
+
+      .dot:nth-child(3) {
+        margin-right: 8px;
+        background: #34d399;
+      }
+
+      pre {
+        overflow-x: auto;
+        margin: 0;
+        padding: 30px 24px;
+        color: #d1fae5;
+        font: 500 1.15rem/1.8 Consolas, "Courier New", monospace;
+      }
+
+      a {
+        color: #93c5fd;
+      }
+
+      footer {
+        margin-top: 20px;
+        color: #aab4c8;
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 420px) {
+        body {
+          padding: 16px;
+        }
+
+        pre {
+          padding: 24px 16px;
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Your Java program output</h1>
+      <p>This is what the Devops Project prints when you run the Java app:</p>
+      <section class="terminal" aria-label="Program output in a terminal">
+        <div class="titlebar">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="dot" aria-hidden="true"></span>
+          <span class="dot" aria-hidden="true"></span>
+          Program output
+        </div>
+        <pre><code>Hello, Maven!</code></pre>
+      </section>
+      <footer>
+        <a href="https://github.com/shivangikanamas/Devops-Project">View the project on GitHub</a>
+      </footer>
+    </main>
+  </body>
+</html>
