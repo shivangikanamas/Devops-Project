@@ -1,2 +1,12 @@
 target/
 .github/modernize/
+data/
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+*.retry
+.env
+settings.xml
+infra/ansible/inventory.ini

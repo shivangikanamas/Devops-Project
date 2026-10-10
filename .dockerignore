@@ -1,0 +1,10 @@
+.git
+.github/modernize
+.terraform
+*.tfstate
+*.tfstate.*
+data
+target
+infra/ansible/inventory.ini
+infra/ansible/*.retry
+**/.env

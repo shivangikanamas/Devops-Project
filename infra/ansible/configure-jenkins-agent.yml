@@ -1,0 +1,98 @@
+---
+- name: Configure a Linux Jenkins agent for the DevOps Tasks pipeline
+  hosts: jenkins_agents
+  become: true
+  vars:
+    kubernetes_minor_version: "v1.34"
+
+  pre_tasks:
+    - name: Require Ubuntu or Debian
+      ansible.builtin.assert:
+        that:
+          - ansible_distribution in ["Ubuntu", "Debian"]
+        fail_msg: "This playbook requires Ubuntu or Debian."
+
+    - name: Create apt keyring directory
+      ansible.builtin.file:
+        path: /etc/apt/keyrings
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+
+  tasks:
+    - name: Download the Eclipse Adoptium signing key
+      ansible.builtin.get_url:
+        url: https://packages.adoptium.net/artifactory/api/gpg/key/public
+        dest: /etc/apt/keyrings/adoptium.asc
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Add the Eclipse Temurin apt repository
+      ansible.builtin.apt_repository:
+        repo: "deb [signed-by=/etc/apt/keyrings/adoptium.asc] https://packages.adoptium.net/artifactory/deb {{ ansible_distribution_release }} main"
+        filename: adoptium
+        state: present
+
+    - name: Install Java 25, Maven, Docker, AWS CLI, and build tools
+      ansible.builtin.apt:
+        name:
+          - ca-certificates
+          - curl
+          - docker.io
+          - git
+          - gnupg
+          - maven
+          - temurin-25-jdk
+        state: present
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: Enable Docker on the build agent
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Allow the Jenkins agent to run Docker
+      ansible.builtin.user:
+        name: jenkins
+        groups:
+          - docker
+        append: true
+
+    - name: Download the Kubernetes apt signing key
+      ansible.builtin.get_url:
+        url: "https://pkgs.k8s.io/core:/stable:/{{ kubernetes_minor_version }}/deb/Release.key"
+        dest: /etc/apt/keyrings/kubernetes-apt-keyring.asc
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Add the Kubernetes kubectl apt repository
+      ansible.builtin.apt_repository:
+        repo: "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.asc] https://pkgs.k8s.io/core:/stable:/{{ kubernetes_minor_version }}/deb/ /"
+        filename: kubernetes
+        state: present
+
+    - name: Install kubectl and the AWS CLI
+      ansible.builtin.apt:
+        name:
+          - awscli
+          - kubectl
+        state: present
+        update_cache: true
+
+    - name: Verify the Java version
+      ansible.builtin.command: java -version
+      changed_when: false
+      register: java_version
+
+    - name: Print the Java runtime version
+      ansible.builtin.debug:
+        var: java_version.stderr_lines
+
+    - name: Verify the Maven installation
+      ansible.builtin.command: mvn --version
+      changed_when: false

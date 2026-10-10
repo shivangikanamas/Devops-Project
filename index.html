@@ -3,120 +3,123 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#0b1020">
-    <title>Devops Project | Program Output</title>
-    <style>
-      :root {
-        color-scheme: dark;
-        font-family: "Segoe UI", Arial, sans-serif;
-        background: #0b1020;
-        color: #e5e7eb;
-      }
-
-      body {
-        box-sizing: border-box;
-        display: grid;
-        min-height: 100vh;
-        margin: 0;
-        padding: 24px;
-        place-items: center;
-      }
-
-      main {
-        width: min(100%, 640px);
-      }
-
-      h1 {
-        margin: 0 0 10px;
-        font-size: clamp(1.75rem, 5vw, 2.5rem);
-      }
-
-      p {
-        margin: 0 0 24px;
-        color: #aab4c8;
-        line-height: 1.6;
-      }
-
-      .terminal {
-        overflow: hidden;
-        border: 1px solid #29334b;
-        border-radius: 12px;
-        background: #101827;
-        box-shadow: 0 24px 64px #0005;
-      }
-
-      .titlebar {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 14px 18px;
-        border-bottom: 1px solid #29334b;
-        color: #aab4c8;
-        font-size: 0.85rem;
-      }
-
-      .dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: #f87171;
-      }
-
-      .dot:nth-child(2) {
-        background: #fbbf24;
-      }
-
-      .dot:nth-child(3) {
-        margin-right: 8px;
-        background: #34d399;
-      }
-
-      pre {
-        overflow-x: auto;
-        margin: 0;
-        padding: 30px 24px;
-        color: #d1fae5;
-        font: 500 1.15rem/1.8 Consolas, "Courier New", monospace;
-      }
-
-      a {
-        color: #93c5fd;
-      }
-
-      footer {
-        margin-top: 20px;
-        color: #aab4c8;
-        font-size: 0.9rem;
-      }
-
-      @media (max-width: 420px) {
-        body {
-          padding: 16px;
-        }
-
-        pre {
-          padding: 24px 16px;
-          font-size: 1rem;
-        }
-      }
-    </style>
+    <meta name="theme-color" content="#101419">
+    <meta name="description" content="A task manager portfolio project built with Java and AWS DevOps tools.">
+    <title>Daymark — Task Manager</title>
+    <link rel="stylesheet" href="assets/styles.css">
+    <script src="assets/app.js" defer></script>
   </head>
   <body>
-    <main>
-      <h1>Your Java program output</h1>
-      <p>This is what the Devops Project prints when you run the Java app:</p>
-      <section class="terminal" aria-label="Program output in a terminal">
-        <div class="titlebar">
-          <span class="dot" aria-hidden="true"></span>
-          <span class="dot" aria-hidden="true"></span>
-          <span class="dot" aria-hidden="true"></span>
-          Program output
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Main navigation">
+        <a class="brand" href="./" aria-label="Daymark home">
+          <span class="brand-mark" aria-hidden="true">D</span>
+          <span>daymark<span class="brand-period">.</span></span>
+        </a>
+        <span class="nav-label">WORKSPACE</span>
+        <a class="nav-link active" href="#tasks" aria-current="page">
+          <span class="nav-icon" aria-hidden="true">▤</span> My tasks
+        </a>
+        <div class="sidebar-note">
+          <span class="note-icon" aria-hidden="true">✳</span>
+          <strong>Make space for focused work.</strong>
+          <span>Small, clear steps make a big difference.</span>
         </div>
-        <pre><code>Hello, Maven!</code></pre>
-      </section>
-      <footer>
-        <a href="https://github.com/shivangikanamas/Devops-Project">View the project on GitHub</a>
-      </footer>
-    </main>
+        <div class="sidebar-footer">
+          <span class="avatar" aria-hidden="true">Y</span>
+          <span class="profile-name">Your workspace<small>Personal board</small></span>
+          <span class="profile-menu" aria-hidden="true">···</span>
+        </div>
+      </aside>
+
+      <main class="main-content" id="tasks">
+        <header class="topbar">
+          <span class="breadcrumb">Workspace <span aria-hidden="true">/</span> My tasks</span>
+          <span class="today-label" id="today-label"></span>
+        </header>
+
+        <section class="page-heading">
+          <div>
+            <span class="eyebrow">YOUR PERSONAL WORKSPACE</span>
+            <h1>Task board<span class="heading-period">.</span></h1>
+            <p class="intro">A little progress each day adds up to big results.</p>
+          </div>
+          <button class="button button-primary" id="open-task-form" type="button">
+            <span aria-hidden="true">＋</span> New task
+          </button>
+        </section>
+
+        <section class="stats-grid" aria-label="Task summary">
+          <article class="stat-card">
+            <span class="stat-label">TOTAL TASKS</span>
+            <div class="stat-bottom"><strong class="stat-number" id="stat-total">0</strong><span class="stat-icon">▤</span></div>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">IN PROGRESS</span>
+            <div class="stat-bottom"><strong class="stat-number" id="stat-progress">0</strong><span class="stat-icon icon-blue">◷</span></div>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">COMPLETED</span>
+            <div class="stat-bottom"><strong class="stat-number" id="stat-completed">0</strong><span class="stat-icon icon-green">✓</span></div>
+          </article>
+        </section>
+
+        <section class="board-section" aria-label="Your tasks">
+          <div class="board-header">
+            <div>
+              <h2>All tasks <span class="task-count" id="task-count">0</span></h2>
+              <p>Keep your next steps in sight.</p>
+            </div>
+            <label class="search-box">
+              <span class="search-icon" aria-hidden="true">⌕</span>
+              <input id="search-input" type="search" placeholder="Find a task..." aria-label="Find a task">
+              <kbd>/</kbd>
+            </label>
+          </div>
+          <div class="filters" role="group" aria-label="Filter tasks">
+            <button class="filter-button selected" type="button" data-filter="ALL" aria-pressed="true">All tasks</button>
+            <button class="filter-button" type="button" data-filter="TODO" aria-pressed="false">To do</button>
+            <button class="filter-button" type="button" data-filter="IN_PROGRESS" aria-pressed="false">In progress</button>
+            <button class="filter-button" type="button" data-filter="DONE" aria-pressed="false">Completed</button>
+          </div>
+          <p class="notice" id="notice" role="status" aria-live="polite"></p>
+          <div class="task-list" id="task-list" aria-live="polite"></div>
+        </section>
+
+        <footer class="app-footer">
+          <span>Made for meaningful progress.</span>
+          <a href="https://github.com/shivangikanamas/Devops-Project">Project source ↗</a>
+        </footer>
+      </main>
+    </div>
+
+    <dialog class="task-dialog" id="task-dialog" aria-labelledby="dialog-title">
+      <form id="task-form">
+        <div class="dialog-heading">
+          <div><span class="eyebrow">YOUR NEXT STEP</span><h2 id="dialog-title">Create a task</h2></div>
+          <button class="icon-button" id="close-dialog" type="button" aria-label="Close dialog">×</button>
+        </div>
+        <label class="field-label" for="title-input">Task name</label>
+        <input class="form-control" id="title-input" name="title" maxlength="100" placeholder="What would you like to do?" required>
+        <label class="field-label" for="description-input">Description <span class="optional">(optional)</span></label>
+        <textarea class="form-control description-input" id="description-input" name="description" maxlength="500" placeholder="Add a few helpful details..." rows="3"></textarea>
+        <div class="field-row">
+          <div><label class="field-label" for="priority-input">Priority</label>
+            <select class="form-control" id="priority-input" name="priority">
+              <option value="MEDIUM">Medium</option><option value="HIGH">High</option><option value="LOW">Low</option>
+            </select>
+          </div>
+          <div><label class="field-label" for="status-input">Status</label>
+            <select class="form-control" id="status-input" name="status">
+              <option value="TODO">To do</option><option value="IN_PROGRESS">In progress</option><option value="DONE">Completed</option>
+            </select>
+          </div>
+        </div>
+        <div class="dialog-actions">
+          <button class="button button-secondary" id="cancel-dialog" type="button">Cancel</button>
+          <button class="button button-primary" type="submit">Add task <span aria-hidden="true">→</span></button>
+        </div>
+      </form>
+    </dialog>
   </body>
 </html>
