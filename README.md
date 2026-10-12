@@ -4,6 +4,8 @@ A portfolio-ready task manager with a Java 25 REST API, a responsive HTML/CSS/Ja
 
 **[Open the interactive browser demo](https://shivangikanamas.github.io/Devops-Project/)** · [View the source on GitHub](https://github.com/shivangikanamas/Devops-Project)
 
+A separate personal portfolio site is in [`portfolio/`](portfolio/). When these files are pushed to the repository's GitHub Pages source, it will be available at `https://shivangikanamas.github.io/Devops-Project/portfolio/` and can be added to LinkedIn's Featured section.
+
 The public demo runs in your browser and saves sample tasks in that browser only. Run the Java application to use the real REST API and its database.
 
 ## What the application does
